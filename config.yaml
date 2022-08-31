@@ -1,0 +1,152 @@
+input_vars: 
+  - name: is_full_run
+    default: false
+    type: string
+    required: true 
+seeder:
+  file: ./seeder/seeder.rb
+parsers:
+- page_type: seed
+  file: "./parsers/seed.rb"
+  disabled: false
+- page_type: listings
+  file: "./parsers/listings.rb"
+  disabled: false
+- page_type: product
+  file: "./parsers/product.rb"
+  disabled: false
+exporters:
+  - exporter_name: items_json
+    exporter_type: json
+    collection: items
+    write_mode: pretty_array
+    start_on_job_done: true
+  - exporter_name: items_csv
+    exporter_type: csv
+    collection: items
+    offset: 0
+    order: desc
+    start_on_job_done: true
+    fields:
+      - header: "competitor_name"
+        path: "competitor_name"
+      - header: "competitor_type"
+        path: "competitor_type"
+      - header: "store_name"
+        path: "store_name"
+      - header: "store_id"
+        path: "store_id"
+      - header: "country_iso"
+        path: "country_iso"
+      - header: "language"
+        path: "language"
+      - header: "currency_code_lc"
+        path: "currency_code_lc"
+      - header: "scraped_at_timestamp"
+        path: "scraped_at_timestamp"
+      - header: "competitor_product_id"
+        path: "competitor_product_id"
+      - header: "name"
+        path: "name"
+      - header: "brand"
+        path: "brand"
+      - header: "category_id"
+        path: "category_id"
+      - header: "category"
+        path: "category"
+      - header: "sub_category"
+        path: "sub_category"
+      - header: "customer_price_lc"
+        path: "customer_price_lc"
+      - header: "base_price_lc"
+        path: "base_price_lc"
+      - header: "has_discount"
+        path: "has_discount"
+      - header: "discount_percentage"
+        path: "discount_percentage"
+      - header: "rank_in_listing"
+        path: "rank_in_listing"
+      - header: "page_number"
+        path: "page_number"
+      - header: "product_pieces"
+        path: "product_pieces"
+      - header: "size_std"
+        path: "size_std"
+      - header: "size_unit_std"
+        path: "size_unit_std"
+      - header: "description"
+        path: "description"
+      - header: "img_url"
+        path: "img_url"
+      - header: "barcode"
+        path: "barcode"
+      - header: "sku"
+        path: "sku"
+      - header: "url"
+        path: "url"
+      - header: "is_available"
+        path: "is_available"
+      - header: "crawled_source"
+        path: "crawled_source"
+      - header: "is_promoted"
+        path: "is_promoted"
+      - header: "type_of_promotion"
+        path: "type_of_promotion"
+      - header: "promo_attributes"
+        path: "promo_attributes"
+      - header: "is_private_label"
+        path: "is_private_label"
+      - header: "latitude"
+        path: "latitude"
+      - header: "longitude"
+        path: "longitude"
+      - header: "reviews"
+        path: "reviews"
+      - header: "store_reviews"
+        path: "store_reviews"
+      - header: "item_attributes"
+        path: "item_attributes"
+      - header: "item_identifiers"
+        path: "item_identifiers"
+      - header: "country_of_origin"
+        path: "country_of_origin"
+      - header: "variants"
+        path: "variants"
+      # - header: "created_date"
+      #   path: "created_date"
+      # - header: "updated_at"
+      #   path: "updated_at"
+      # - header: "_ingested_at"
+      #   path: "_ingested_at"
+      # - header: "real_url"
+      #   path: "real_url"
+  # - exporter_name: items_csv
+  #   exporter_type: csv
+  #   collection: items
+  #   offset: 0
+  #   order: desc
+  #   fields:
+  #     - header: "date"
+  #       path: "date"
+  #     - header: "lead_id"
+  #       path: "lead_id"
+  #     - header: "url"
+  #       path: "url"
+  #     - header: "item_id"
+  #       path: "item_id"
+  #     - header: "item_name"
+  #       path: "item_name"
+  #     - header: "item_description"
+  #       path: "item_description"
+  #     - header: "item_price"
+  #       path: "item_price"
+  #     - header: "currency"
+  #       path: "currency"
+  #     - header: "item_is_promoted"
+  #       path: "item_is_promoted"
+  # - exporter_name: items_json_line
+  #   exporter_type: json
+  #   collection: items
+  #   write_mode: line
+  #   offset: 0
+
