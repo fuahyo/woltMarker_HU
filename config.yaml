@@ -27,6 +27,8 @@ exporters:
   - exporter_name: items_csv
     exporter_type: csv
     collection: items
+    export_filename: <d:yyyyMMdd>_<name>
+    no_subfolder: true
     offset: 0
     order: desc
     start_on_job_done: true
