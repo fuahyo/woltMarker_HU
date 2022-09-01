@@ -212,7 +212,7 @@ items.each.with_index(1) do |item, idx|
         img_url: img_url,
         barcode: barcode,
         sku: nil,
-        url: nil,
+        url: "#{Helpers::country_data[ENV['country_code']]['URL']}/#{id}",
         is_available: is_available,
         crawled_source: "WEB",
         is_promoted: is_promoted,
@@ -231,19 +231,23 @@ items.each.with_index(1) do |item, idx|
     }
     # puts item['rank']
 
-    pages << {
-        url: "https://prodinfo.wolt.com/#{Helpers::country_data[ENV['country_code']]['store_id']}/#{id}?lang=#{Helpers::country_data[ENV['country_code']]['lang']}&themeTextPrimary=rgba%2832%2C+33%2C+37%2C+1%29&themeTextSecondary=rgba%2832%2C+33%2C+37%2C+0.64%29&themeTextTertiary=rgba%2832%2C+33%2C+37%2C+0.40%29&themeSurfaceMain=rgba%28255%2C+255%2C+255%2C+1%29&themeBorderLight=rgba%2832%2C+33%2C+37%2C+0.12%29",
-        page_type: 'product',
-        fetch_type: 'standard',
-        method: 'GET',
-        headers: headers,
-        http2: true,
-        vars: vars.merge({
-            "product" => product,
-        }),
-    }
+    if item['has_extra_info']
+        pages << {
+            url: "https://prodinfo.wolt.com/#{Helpers::country_data[ENV['country_code']]['store_id']}/#{id}?lang=#{Helpers::country_data[ENV['country_code']]['lang']}&themeTextPrimary=rgba%2832%2C+33%2C+37%2C+1%29&themeTextSecondary=rgba%2832%2C+33%2C+37%2C+0.64%29&themeTextTertiary=rgba%2832%2C+33%2C+37%2C+0.40%29&themeSurfaceMain=rgba%28255%2C+255%2C+255%2C+1%29&themeBorderLight=rgba%2832%2C+33%2C+37%2C+0.12%29",
+            page_type: 'product',
+            fetch_type: 'standard',
+            method: 'GET',
+            headers: headers,
+            http2: true,
+            vars: vars.merge({
+                "product" => product,
+                "parent_gid" => page['gid'],
+            }),
+        }
+    else
+        outputs << product
+    end
 
-
-    # save_outputs(outputs) if outputs.count > 49
+    save_outputs(outputs) if outputs.count > 49
     save_pages(pages) if pages.count > 49
 end
