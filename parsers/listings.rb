@@ -125,19 +125,25 @@ items.each.with_index(1) do |item, idx|
     end
 
     product_pieces_regex = [
-        /(\d+)[-\s]?per\s?packs?(?!\S)/i,
-        /(\d+)[-\s]?packs?(?!\S)/i,
-        /(\d+)[-\s]?pcs(?!\S)/i,
-        /(\d+)[-\s]?pieces?(?!\S)/i,
-        /(\d+)[-\s]?tablets?(?!\S)/i,
-        /(\d+)[-\s]?unidades?(?!\S)/i,
-        /(\d+)[-\s]?und(?!\S)/i,
-        /(\d+)[-\s]?uds(?!\S)/i,
-        /(\d+)[-\s]?sobres?(?!\S)/i,
-        /(\d+)[-\s]?paq(?!\w+)(?!\S)/i,
-        /(\d+)[-\s]?tabletas?(?!\S)/i,
-        /(\d+)[-\s]?cápsulas?(?!\S)/i,
-        /(\d+)[-\s]?piezas?(?!\S)/i,
+        /(\d+)[-\s]?per\s?packs?[\.\)]?(?!\S)/i,
+        /(?<!\S)pack\s+of\s+(\d+)(?!\S)/i,
+        /(\d+)[-\s]?packs?[\.\)]?(?!\S)/i,
+        /(\d+)[-\s]?pcs[\.\)]?(?!\S)/i,
+        /(\d+)[-\s]?pieces?[\.\)]?(?!\S)/i,
+        /(\d+)[-\s]?tablets?[\.\)]?(?!\S)/i,
+        /(\d+)[-\s]?unidades?[\.\)]?(?!\S)/i,
+        /(\d+)[-\s]?und[\.\)]?(?!\S)/i,
+        /(\d+)[-\s]?uds[\.\)]?(?!\S)/i,
+        /(\d+)[-\s]?sobres?[\.\)]?(?!\S)/i,
+        /(\d+)[-\s]?paq[\.\)]?(?!\w+)(?!\S)/i,
+        /(\d+)[-\s]?tabletas?[\.\)]?(?!\S)/i,
+        /(\d+)[-\s]?cápsulas?[\.\)]?(?!\S)/i,
+        /(\d+)[-\s]?piezas?[\.\)]?(?!\S)/i,
+        /(\d+)[-\s]?ply[\.\)]?(?!\S)/i,
+        /(\d+)[-\s]?bags?[\.\)]?(?!\S)/i,
+        /(\d+)[-\s]?bars?[\.\)]?(?!\S)/i,
+        /(\d+)[-\s]\'s[\.\)]?(?!\S)/i,
+        /(?<!\S)x(\d+)(?!\S)/i,
     ].find {|ppr| name =~ ppr}
     product_pieces = product_pieces_regex ? $1.to_i : 1
     product_pieces = 1 if product_pieces == 0
@@ -157,6 +163,7 @@ items.each.with_index(1) do |item, idx|
 
         product_pieces = parse_pieces(name, size_unit_std, std) if product_pieces == 1 
     end
+
 
     description = item['description']
     rank = item['rank']
