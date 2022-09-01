@@ -3,6 +3,9 @@ input_vars:
     default: false
     type: string
     required: true 
+  - name: country_code
+    type: string
+    required: true 
 seeder:
   file: ./seeder/seeder.rb
 parsers:
