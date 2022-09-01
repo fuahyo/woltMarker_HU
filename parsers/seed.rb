@@ -29,9 +29,9 @@ address = rating_json['address']
 openingHours = rating_json['openingHours']
 
 
-
+slug = page['url'].split('/').select{|x| !x.empty?}.last
 pages << {
-    url: 'https://restaurant-api.wolt.com/v4/venues/slug/wolt-market-stockholm-city/menu?unit_prices=true&show_weighted_items=true',
+    url: "https://restaurant-api.wolt.com/v4/venues/slug/#{slug}/menu?unit_prices=true&show_weighted_items=true",
     page_type: 'listings',
     fetch_type: 'standard',
     method: 'GET',
