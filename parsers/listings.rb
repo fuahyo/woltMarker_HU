@@ -44,7 +44,7 @@ items.each.with_index(1) do |item, idx|
 
     id = item['id']
 
-    name = item['name']
+    name = item['name'].gsub(/[[:space:]]/, ' ')
     brand = nil
 
     category_id = item['category']
@@ -143,12 +143,17 @@ items.each.with_index(1) do |item, idx|
         /(\d+)[-\s]?ks[\.\)]?(?!\S)/i,
         /(\d+)[-\s]?bags?[\.\)]?(?!\S)/i,
         /(\d+)[-\s]?bars?[\.\)]?(?!\S)/i,
+        /(\d+)[-\s]?kapsl[ií][\.\)]?(?!\S)/i,
+        /(\d+)[-\s]?vrstv[eé][\.\)]?(?!\S)/i,
+        /(\d+)[-\s]?st[\.\)]?(?!\S)/i,
         /(\d+)[-\s]\'s[\.\)]?(?!\S)/i,
         /(?<!\S)x(\d+)(?!\S)/i,
-    ].find {|ppr| name =~ ppr}
-    product_pieces = product_pieces_regex ? $1.to_i : 1
+    ]
+    find_regex = product_pieces_regex.find {|ppr| name =~ ppr}
+    product_pieces = find_regex ? $1.to_i : 1
     product_pieces = 1 if product_pieces == 0
     product_pieces ||= 1
+
 
     if product_pieces == 1 && (size_unit_std =~ /litre|liter|Litros|Galones|lt|lb|Libras|l|ml|cl|gr|gl|g|mg|kg|oz|onz/)
         def parse_pieces(string, size_unit_std, std)
@@ -163,6 +168,15 @@ items.each.with_index(1) do |item, idx|
         end
 
         product_pieces = parse_pieces(name, size_unit_std, std) if product_pieces == 1 
+    end
+
+    
+
+    if product_pieces == 1
+        find_regex = product_pieces_regex.find {|ppr| item['unit_info'] =~ ppr}
+        product_pieces = find_regex ? $1.to_i : 1
+        product_pieces = 1 if product_pieces == 0
+        product_pieces ||= 1
     end
 
 
