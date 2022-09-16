@@ -21,6 +21,8 @@ parsers:
 exporters:
   - exporter_name: items_json
     exporter_type: json
+    export_filename: <d:yyyyMMdd>_<name>
+    no_subfolder: true
     collection: items
     write_mode: pretty_array
     start_on_job_done: true

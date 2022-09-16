@@ -63,7 +63,8 @@ items.each.with_index(1) do |item, idx|
 
     discount_percentage = has_discount ? ((1.0 - (customer_price_lc / base_price_lc)) * 100).round(7) : nil
 
-    is_available = item['quantity_left'] > 0 
+    puts idx
+    is_available = item['quantity_left'] > 0 rescue (item['quantity_left'] == nil ? false : (raise 'edgecase for item["quantity_left"]'))
 
     def get_size_and_unit(string)
         size_regex = [
