@@ -28,6 +28,11 @@ vars = page['vars']
 json = JSON.parse(content)
 
 categories = json['categories']
+if categories.count > 1
+    is_sub_category = true
+else
+    is_sub_category = false
+end
 
 # puts json['items'].length
 items = json['items']
@@ -47,10 +52,16 @@ items.each.with_index(1) do |item, idx|
     name = item['name'].gsub(/[[:space:]]/, ' ')
     brand = nil
 
-    category_id = item['category']
-    category = categories.select{|c| c['id'] == category_id}.first['name']
-
-    sub_category = nil
+    if is_sub_category == true
+        category_id = json['categories'].first['id']
+        category = json['categories'].first['name']
+        sub_cat_id = item['category']
+        sub_category = categories.select{|c| c['id'] == sub_cat_id}.first['name']
+    else
+        category_id = item['category']
+        category = categories.select{|c| c['id'] == category_id}.first['name']
+        sub_category = nil
+    end
 
     # puts id
 
@@ -222,7 +233,7 @@ items.each.with_index(1) do |item, idx|
         brand: brand,
         category_id: category_id,
         category: category,
-        sub_category: sub_category,
+        sub_category: sub_category.gsub('💙 ','').gsub(' ⌛',''),
         customer_price_lc: customer_price_lc.to_s,
         base_price_lc: base_price_lc.to_s,
         has_discount: has_discount,
