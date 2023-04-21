@@ -20,6 +20,7 @@ headers = {
     'accept-encoding': 'gzip, deflate, br'
 }
 
+cat_url = html.css('.sc-dbf654ef-0.jtBlkj')
 scripts = html.css('script[type="application/ld+json"]').select{|s| s.text.include?('ratingValue')}.first
 
 rating_json = JSON.parse(scripts.text)
@@ -28,20 +29,21 @@ geo = rating_json['geo']
 address = rating_json['address']
 openingHours = rating_json['openingHours']
 
-
-slug = page['url'].split('/').select{|x| !x.empty?}.last
-pages << {
-    url: "https://restaurant-api.wolt.com/v4/venues/slug/#{slug}/menu?unit_prices=true&show_weighted_items=true",
-    page_type: 'listings',
-    fetch_type: 'standard',
-    method: 'GET',
-    headers: headers,
-    http2: true,
-    vars: {
-        page_number: 1,
-        rating: rating,
-        geo: geo,
-        address: address,
-        openingHours: openingHours,
+cat_url.each do |cat|
+    slug = cat.css('a').attr('href').text.split('/').select{|x| !x.empty?}.last
+    pages << {
+        url: "https://restaurant-api.wolt.com/v4/venues/slug/#{slug}/menu?unit_prices=true&show_weighted_items=true",
+        page_type: 'listings',
+        fetch_type: 'standard',
+        method: 'GET',
+        headers: headers,
+        http2: true,
+        vars: {
+            page_number: 1,
+            rating: rating,
+            geo: geo,
+            address: address,
+            openingHours: openingHours,
+        }
     }
-}
+end
