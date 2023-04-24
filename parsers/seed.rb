@@ -30,7 +30,7 @@ address = rating_json['address']
 openingHours = rating_json['openingHours']
 
 cat_url.each do |cat|
-    slug = cat.css('a').attr('href').text.split('/').select{|x| !x.empty?}.last
+    slug = cat.attr('href').split('/').select{|x| !x.empty?}.last
     pages << {
         url: "https://restaurant-api.wolt.com/v4/venues/slug/wolt-market-smichov/menu/categories/slug/#{slug}?unit_prices=true&show_weighted_items=true&show_subcategories=true",
         # url: "https://restaurant-api.wolt.com/v4/venues/slug//menu?unit_prices=true&show_weighted_items=true",
