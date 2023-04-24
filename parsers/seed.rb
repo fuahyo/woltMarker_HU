@@ -20,7 +20,7 @@ headers = {
     'accept-encoding': 'gzip, deflate, br'
 }
 
-cat_url = html.css('.sc-dbf654ef-0.jtBlkj')
+cat_url = html.css('.sc-dbf654ef-0.jtBlkj .sc-32329728-0.goqtRx')
 scripts = html.css('script[type="application/ld+json"]').select{|s| s.text.include?('ratingValue')}.first
 
 rating_json = JSON.parse(scripts.text)
