@@ -21,6 +21,7 @@ headers = {
 }
 
 cat_url = html.css('.sc-dbf654ef-0.jtBlkj .sc-32329728-0.goqtRx')
+cat_url2 = html.css('.sc-dbf654ef-0.jtBlkj')
 scripts = html.css('script[type="application/ld+json"]').select{|s| s.text.include?('ratingValue')}.first
 
 rating_json = JSON.parse(scripts.text)
@@ -31,6 +32,26 @@ openingHours = rating_json['openingHours']
 
 cat_url.each do |cat|
     slug = cat.attr('href').split('/').select{|x| !x.empty?}.last
+    pages << {
+        url: "https://restaurant-api.wolt.com/v4/venues/slug/wolt-market-smichov/menu/categories/slug/#{slug}?unit_prices=true&show_weighted_items=true&show_subcategories=true",
+        # url: "https://restaurant-api.wolt.com/v4/venues/slug//menu?unit_prices=true&show_weighted_items=true",
+        page_type: 'listings',
+        fetch_type: 'standard',
+        method: 'GET',
+        headers: headers,
+        http2: true,
+        vars: {
+            page_number: 1,
+            rating: rating,
+            geo: geo,
+            address: address,
+            openingHours: openingHours,
+        }
+    }
+end
+
+cat_url2.each do |cat|
+    slug = cat.css('a').attr('href').text.split('/').select{|x| !x.empty?}.last
     pages << {
         url: "https://restaurant-api.wolt.com/v4/venues/slug/wolt-market-smichov/menu/categories/slug/#{slug}?unit_prices=true&show_weighted_items=true&show_subcategories=true",
         # url: "https://restaurant-api.wolt.com/v4/venues/slug//menu?unit_prices=true&show_weighted_items=true",
