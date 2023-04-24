@@ -233,7 +233,7 @@ items.each.with_index(1) do |item, idx|
         brand: brand,
         category_id: category_id,
         category: category,
-        sub_category: sub_category.gsub('💙 ','').gsub(' ⌛',''),
+        sub_category: sub_category.nil? ? nil : sub_category.gsub('💙 ','').gsub(' ⌛',''),
         customer_price_lc: customer_price_lc.to_s,
         base_price_lc: base_price_lc.to_s,
         has_discount: has_discount,
