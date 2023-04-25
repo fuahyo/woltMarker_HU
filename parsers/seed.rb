@@ -1,3 +1,5 @@
+require './lib/helpers.rb'
+
 html = Nokogiri.HTML(content)
 
 headers = {
