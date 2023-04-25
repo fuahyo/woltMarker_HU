@@ -7,6 +7,7 @@ module Helpers
                 "store_id" => "62398fab17a025073829c9a3",
                 "language" => "ENG",
                 "currency_code_lc" => "EUR",
+                "url" => "wolt-market-nicosia"
             },
             "HU" => {
                 "URL" => "https://wolt.com/en/hun/budapest/venue/wolt-market-nyugati",
@@ -14,6 +15,7 @@ module Helpers
                 "store_id" => "61a0ab630e2c8131bf265e60",
                 "language" => "HUN",
                 "currency_code_lc" => "HUF",
+                "url" => "wolt-market-nyugati"
             },
             "CZ" => {
                 "URL" => "https://wolt.com/en/cze/prague/venue/wolt-market-smichov",
@@ -21,6 +23,7 @@ module Helpers
                 "store_id" => "61780a5b5777202f21085625",
                 "language" => "CZE",
                 "currency_code_lc" => "CZK",
+                "url" => "wolt-market-smichov",
             },
         }
     end
