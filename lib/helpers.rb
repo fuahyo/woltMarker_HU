@@ -25,6 +25,14 @@ module Helpers
                 "currency_code_lc" => "CZK",
                 "url" => "wolt-market-smichov",
             },
+            "SE" => {
+                "URL" => "https://wolt.com/en/cze/prague/venue/wolt-market-stockholm-city",
+                "lang" => "en",
+                "store_id" => "627923441d18a8ef82e5a066",
+                "language" => "SWE",
+                "currency_code_lc" => "SEK",
+                "url" => "wolt-market-stockholm-city",
+            },
         }
     end
     
