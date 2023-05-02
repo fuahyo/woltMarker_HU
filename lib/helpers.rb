@@ -33,6 +33,14 @@ module Helpers
                 "currency_code_lc" => "SEK",
                 "url" => "wolt-market-stockholm-city",
             },
+            "FI" => {
+                "URL" => "https://wolt.com/en/fin/helsinki/venue/wolt-market-kamppi",
+                "lang" => "en",
+                "store_id" => "60ebf5b467ae83933b8a6032",
+                "language" => "FIN",
+                "currency_code_lc" => "EUR",
+                "url" => "wolt-market-kamppi",
+            },
         }
     end
     
