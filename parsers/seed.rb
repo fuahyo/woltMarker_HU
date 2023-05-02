@@ -32,33 +32,33 @@ address = rating_json['address']
 openingHours = rating_json['openingHours']
 store_id = content[/https\:\/\/imageproxy.wolt.com\/venue\/([^\/]+)\//, 1]
 
-cat_url.each do |cat|
-    slug = cat.attr('href').split('/').select{|x| !x.empty?}.last
+# cat_url.each do |cat|
+#     slug = cat.attr('href').split('/').select{|x| !x.empty?}.last
     
-    pages << {
-        url: "https://restaurant-api.wolt.com/v4/venues/slug/#{Helpers::country_data[ENV['country_code']]['url']}/menu/categories/slug/#{slug}?unit_prices=true&show_weighted_items=true&show_subcategories=true",
-        # url: "https://restaurant-api.wolt.com/v4/venues/slug//menu?unit_prices=true&show_weighted_items=true",
-        page_type: 'listings',
-        fetch_type: 'standard',
-        method: 'GET',
-        headers: headers,
-        http2: true,
-        vars: {
-            page_number: 1,
-            rating: rating,
-            geo: geo,
-            address: address,
-            openingHours: openingHours,
-            store_id: store_id,
-        }
-    }
-end
+#     pages << {
+#         url: "https://restaurant-api.wolt.com/v4/venues/slug/#{Helpers::country_data[ENV['country_code']]['url']}/menu/categories/slug/#{slug}?unit_prices=true&show_weighted_items=true&show_subcategories=true",
+#         # url: "https://restaurant-api.wolt.com/v4/venues/slug//menu?unit_prices=true&show_weighted_items=true",
+#         page_type: 'listings',
+#         fetch_type: 'standard',
+#         method: 'GET',
+#         headers: headers,
+#         http2: true,
+#         vars: {
+#             page_number: 1,
+#             rating: rating,
+#             geo: geo,
+#             address: address,
+#             openingHours: openingHours,
+#             store_id: store_id,
+#         }
+#     }
+# end
 
-slug = html.css('.sc-32329728-0.jLcOl').attr('href').text.split('/').select{|x| !x.empty?}.last
+# slug = html.css('.sc-32329728-0.jLcOl').attr('href').text.split('/').select{|x| !x.empty?}.last
     
 pages << {
-    url: "https://restaurant-api.wolt.com/v4/venues/slug/#{Helpers::country_data[ENV['country_code']]['url']}/menu/categories/slug/#{slug}?unit_prices=true&show_weighted_items=true&show_subcategories=true",
-    # url: "https://restaurant-api.wolt.com/v4/venues/slug//menu?unit_prices=true&show_weighted_items=true",
+    # url: "https://restaurant-api.wolt.com/v4/venues/slug/#{Helpers::country_data[ENV['country_code']]['url']}/menu/categories/slug/#{slug}?unit_prices=true&show_weighted_items=true&show_subcategories=true",
+    url: "https://restaurant-api.wolt.com/v4/venues/slug/wolt-market-kamppi/menu/categories/slug/lihat-127?show_subcategories=true&show_weighted_items=true&unit_prices=true",
     page_type: 'listings',
     fetch_type: 'standard',
     method: 'GET',
