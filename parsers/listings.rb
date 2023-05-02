@@ -45,6 +45,8 @@ items = get_every_second_array(get_every_second_array(get_every_second_array(ite
 store_name = json['name']
 store_id = json['id']
 
+require 'byebug'
+byebug
 items.each.with_index(1) do |item, idx|
 
     id = item['id']
