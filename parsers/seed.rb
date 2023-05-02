@@ -22,7 +22,7 @@ headers = {
     'accept-encoding': 'gzip, deflate, br'
 }
 
-cat_url = html.css('.sc-d8e1f950-3.dmNWMr .sc-32329728-0.goqtRx')
+cat_url = html.css('div[data-test-id="navigation-sidebar"] a[class*="sc-32329728-0"]')
 scripts = html.css('script[type="application/ld+json"]').select{|s| s.text.include?('ratingValue')}.first
 
 rating_json = JSON.parse(scripts.text)
