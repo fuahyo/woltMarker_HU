@@ -30,6 +30,7 @@ rating = rating_json['aggregateRating']
 geo = rating_json['geo']
 address = rating_json['address']
 openingHours = rating_json['openingHours']
+store_id = content[/https\:\/\/imageproxy.wolt.com\/venue\/([^\/]+)\//, 1]
 
 cat_url.each do |cat|
     slug = cat.attr('href').split('/').select{|x| !x.empty?}.last
@@ -48,6 +49,7 @@ cat_url.each do |cat|
             geo: geo,
             address: address,
             openingHours: openingHours,
+            store_id: store_id,
         }
     }
 end
@@ -68,5 +70,6 @@ pages << {
         geo: geo,
         address: address,
         openingHours: openingHours,
+        store_id: store_id,
     }
 }
