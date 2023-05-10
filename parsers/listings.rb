@@ -268,9 +268,9 @@ items.each.with_index(1) do |item, idx|
     if item['has_extra_info']
 
         #store_id = Helpers::country_data[ENV['country_code']]['store_id']
-        store_id = page['vars']['store_id']
+        sssssssssssss = page['vars']['store_id']
         pages << {
-            url: "https://prodinfo.wolt.com/#{store_id}/#{id}?lang=#{Helpers::country_data[ENV['country_code']]['lang']}&themeTextPrimary=rgba%2832%2C+33%2C+37%2C+1%29&themeTextSecondary=rgba%2832%2C+33%2C+37%2C+0.64%29&themeTextTertiary=rgba%2832%2C+33%2C+37%2C+0.40%29&themeSurfaceMain=rgba%28255%2C+255%2C+255%2C+1%29&themeBorderLight=rgba%2832%2C+33%2C+37%2C+0.12%29",
+            url: "https://prodinfo.wolt.com/#{sssssssssssss}/#{id}?lang=#{Helpers::country_data[ENV['country_code']]['lang']}&themeTextPrimary=rgba%2832%2C+33%2C+37%2C+1%29&themeTextSecondary=rgba%2832%2C+33%2C+37%2C+0.64%29&themeTextTertiary=rgba%2832%2C+33%2C+37%2C+0.40%29&themeSurfaceMain=rgba%28255%2C+255%2C+255%2C+1%29&themeBorderLight=rgba%2832%2C+33%2C+37%2C+0.12%29",
             page_type: 'product',
             fetch_type: 'standard',
             method: 'GET',
