@@ -1,4 +1,5 @@
 input_vars: 
+  - name: reparse
   - name: is_full_run
     default: false
     type: string
