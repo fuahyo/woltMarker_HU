@@ -54,7 +54,7 @@ cat_url.each do |cat|
     }
 end
 
-slug = html.css('[data-test-id="navigation-sidebar-link"]').attr('href').text.split('/').select{|x| !x.empty?}.last
+slug = html.css('.sc-32329728-0.jLcOl').attr('href').text.split('/').select{|x| !x.empty?}.last
     
 pages << {
     url: "https://restaurant-api.wolt.com/v4/venues/slug/#{Helpers::country_data[ENV['country_code']]['url']}/menu/categories/slug/#{slug}?unit_prices=true&show_weighted_items=true&show_subcategories=true",
