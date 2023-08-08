@@ -22,7 +22,7 @@ headers = {
     'accept-encoding': 'gzip, deflate, br'
 }
 
-cat_url = html.css('div[data-test-id="navigation-sidebar"] a[class*="sc-32329728-0"]')
+cat_url = html.css('div[data-test-id="navigation-sidebar"] .cLMPjZ[data-test-id="navigation-sidebar-link"]')
 scripts = html.css('script[type="application/ld+json"]').select{|s| s.text.include?('ratingValue')}.first
 
 rating_json = JSON.parse(scripts.text)
@@ -54,7 +54,7 @@ cat_url.each do |cat|
     }
 end
 
-slug = html.css('.sc-32329728-0.jLcOl').attr('href').text.split('/').select{|x| !x.empty?}.last
+slug = html.css('.sc-32329728-0.jLcOl').attr('href').text.split('/').select{|x| !x.empty?}.last rescue nil
     
 pages << {
     url: "https://restaurant-api.wolt.com/v4/venues/slug/#{Helpers::country_data[ENV['country_code']]['url']}/menu/categories/slug/#{slug}?unit_prices=true&show_weighted_items=true&show_subcategories=true",
@@ -72,4 +72,4 @@ pages << {
         openingHours: openingHours,
         store_id: store_id,
     }
-}
+} if slug
