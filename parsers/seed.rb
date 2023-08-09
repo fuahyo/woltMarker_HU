@@ -22,7 +22,9 @@ headers = {
     'accept-encoding': 'gzip, deflate, br'
 }
 
-cat_url = html.css('div[data-test-id="navigation-sidebar"] .cLMPjZ[data-test-id="navigation-sidebar-link"]')
+cat_url = html.css('a[data-test-id*="navigation-sidebar"]').to_a.filter{|x| !x.attr('href').include?('#')}
+
+
 scripts = html.css('script[type="application/ld+json"]').select{|s| s.text.include?('ratingValue')}.first
 
 rating_json = JSON.parse(scripts.text)
