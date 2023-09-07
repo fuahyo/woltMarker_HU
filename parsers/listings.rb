@@ -199,9 +199,18 @@ items.each.with_index(1) do |item, idx|
     
     # finish if id == '62836bbaa4badea9b94e5baf'
 
-    type_of_promotion = nil
-    promo_attributes = nil
-    is_promoted = false
+    # type_of_promotion = nil
+    # promo_attributes = {}
+    # is_promoted = false
+
+    promotions = []
+    discount_text = item['tags'].find{|t| t['id'] == 'discount'}['name'] rescue nil
+    promotions << discount_text if discount_text
+ 
+
+    is_promoted = promotions.empty? ? false : true
+    type_of_promotion = promotions.empty? ? '' : 'Banner'
+    promo_attributes = promotions.empty? ? nil : {'promo_detail' => "'#{promotions.join("', '")}'"}.to_json
 
     is_private_label = (brand =~ /wolt/i) ? false : true
     is_private_label = nil if brand.nil? || brand&.empty?
