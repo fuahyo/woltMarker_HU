@@ -209,7 +209,7 @@ items.each.with_index(1) do |item, idx|
  
 
     is_promoted = promotions.empty? ? false : true
-    type_of_promotion = promotions.empty? ? '' : 'Banner'
+    type_of_promotion = promotions.empty? ? '' : 'Badges'
     promo_attributes = promotions.empty? ? nil : {'promo_detail' => "'#{promotions.join("', '")}'"}.to_json
 
     is_private_label = (brand =~ /wolt/i) ? false : true
