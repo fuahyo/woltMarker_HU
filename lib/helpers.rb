@@ -10,12 +10,12 @@ module Helpers
                 "url" => "wolt-market-nicosia"
             },
             "HU" => {
-                "URL" => "https://wolt.com/en/hun/budapest/venue/wolt-market-nyugati",
+                "URL" => "https://wolt.com/en/hun/budapest/venue/wolt-market-keleti",
                 "lang" => "en",
-                "store_id" => "61a0ab630e2c8131bf265e60",
+                "store_id" => "61a0accb048dd79ecb11f6e8",
                 "language" => "HUN",
                 "currency_code_lc" => "HUF",
-                "url" => "wolt-market-nyugati"
+                "url" => "wolt-market-keleti"
             },
             "CZ" => {
                 "URL" => "https://wolt.com/en/cze/prague/venue/wolt-market-smichov",
