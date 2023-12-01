@@ -22,7 +22,7 @@ headers = {
     'accept-encoding': 'gzip, deflate, br'
 }
 
-cat_url = html.css('a[data-test-id*="navigation-sidebar"]').to_a.filter{|x| !x.attr('href').include?('#')}
+cat_url = html.css('a[data-test-id*="navigation-bar"]').to_a.filter{|x| !x.attr('href').include?('#')}
 
 
 scripts = html.css('script[type="application/ld+json"]').select{|s| s.text.include?('ratingValue')}.first
