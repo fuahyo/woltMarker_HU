@@ -9,6 +9,7 @@ input_vars:
   - name: country_code
     type: string
     required: true 
+parse_failed_pages: true
 seeder:
   file: ./seeder/seeder.rb
 parsers:

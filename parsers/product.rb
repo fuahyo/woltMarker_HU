@@ -1,3 +1,14 @@
+
+if page['response_status_code'] != 200 
+    
+    if page['refetch_count'] < 2 
+        refetch page['gid']
+    end
+
+    raise 'too many refetch'
+end
+
+
 require './lib/helpers.rb'
 
 vars = page['vars']
