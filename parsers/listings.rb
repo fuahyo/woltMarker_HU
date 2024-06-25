@@ -229,6 +229,16 @@ items.each.with_index(1) do |item, idx|
     item_identifiers = (barcode.nil? || barcode&.empty?) ? nil : {barcode:"'#{barcode}'"}.to_json
 
     item_attributes = nil
+    dietary = item["dietary_preferences"]
+
+    unless dietary.empty? || dietary.nil?
+        dietary = dietary.map{|i| "'#{i}'"}.join(", ")
+
+        prod["item_attributes"] = JSON.generate({
+            "dietary attributes" => dietary,
+        })
+    end
+
     country_of_origin = nil
     variants = nil
 
