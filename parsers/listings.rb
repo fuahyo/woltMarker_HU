@@ -230,11 +230,9 @@ items.each.with_index(1) do |item, idx|
 
     item_attributes = nil
     dietary = item["dietary_preferences"]
-
     unless dietary.empty? || dietary.nil?
         dietary = dietary.map{|i| "'#{i}'"}.join(", ")
-
-        prod["item_attributes"] = JSON.generate({
+        item_attributes = JSON.generate({
             "dietary attributes" => dietary,
         })
     end
