@@ -1,4 +1,5 @@
-
+env_vars:
+ - name: needs_reparse
 input_vars:
   - name: needs_reparse
   - name: is_full_run
