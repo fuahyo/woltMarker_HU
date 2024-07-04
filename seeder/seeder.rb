@@ -1,7 +1,7 @@
 require './lib/helpers.rb'
 
 pages << {
-    url: Helpers::country_data[ENV['country_code']]['URL'],
+    url: Helpers::country_data["HU"]['URL'],
     page_type: 'seed',
     fetch_type: 'standard',
     method: 'GET',
