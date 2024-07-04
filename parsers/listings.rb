@@ -78,6 +78,7 @@ items.each.with_index(1) do |item, idx|
 
     customer_price_lc = Float(item['baseprice']) / 100 
     base_price_lc = Float(item['original_price']) / 100 rescue customer_price_lc
+    base_price_lc = customer_price_lc if base_price_lc.nil?
 
     base_price_lc = customer_price_lc if base_price_lc < customer_price_lc
     base_price_lc = customer_price_lc if base_price_lc == 0
@@ -245,6 +246,21 @@ items.each.with_index(1) do |item, idx|
 
     store_reviews = {"num_total_reviews": vars['rating']['ratingCount'],"avg_rating": vars['rating']['ratingValue']}.to_json
 
+    country_code = ENV['country_code']
+    country_code = "HU" if country_code.nil?
+    country_data = Helpers::country_data[country_code] 
+    if country_data
+        languageProduct = country_data['language']
+        currency_code_lc = country_data['currency_code_lc']
+        langProduct = country_data['lang']
+        urlProduct = "#{country_data['URL']}/#{id}" rescue nil
+    else 
+        languageProduct = nil
+        currency_code_lc = nil
+        langProduct = nil
+        urlProduct = nil 
+    end 
+
     product = {
         _collection: "items",
         _id: id,
@@ -253,8 +269,8 @@ items.each.with_index(1) do |item, idx|
         store_name: store_name,
         store_id: store_id,
         country_iso: ENV['country_code'],
-        language: Helpers::country_data[ENV['country_code']]['language'],
-        currency_code_lc: Helpers::country_data[ENV['country_code']]['currency_code_lc'],
+        language: languageProduct,
+        currency_code_lc: currency_code_lc,
         scraped_at_timestamp: (ENV['reparse'] == "1" ? (Time.parse(page['fetched_at']) + 1).strftime('%Y-%m-%d %H:%M:%S') : Time.parse(page['fetched_at']).strftime('%Y-%m-%d %H:%M:%S')),
         competitor_product_id: id,
         name: name,
@@ -274,7 +290,7 @@ items.each.with_index(1) do |item, idx|
         img_url: img_url,
         barcode: nil,
         sku: nil,
-        url: "#{Helpers::country_data[ENV['country_code']]['URL']}/#{id}",
+        url: urlProduct,
         is_available: is_available,
         crawled_source: "WEB",
         is_promoted: is_promoted,
@@ -298,7 +314,7 @@ items.each.with_index(1) do |item, idx|
         #store_id = Helpers::country_data[ENV['country_code']]['store_id']
         # store_id = store_id
         pages << {
-            url: "https://prodinfo.wolt.com/61780a5b5777202f21085625/#{id}?lang=#{Helpers::country_data[ENV['country_code']]['lang']}&themeTextPrimary=rgba%2832%2C+33%2C+37%2C+1%29&themeTextSecondary=rgba%2832%2C+33%2C+37%2C+0.64%29&themeTextTertiary=rgba%2832%2C+33%2C+37%2C+0.40%29&themeSurfaceMain=rgba%28255%2C+255%2C+255%2C+1%29&themeBorderLight=rgba%2832%2C+33%2C+37%2C+0.12%29",
+            url: "https://prodinfo.wolt.com/61780a5b5777202f21085625/#{id}?lang=#{langProduct}&themeTextPrimary=rgba%2832%2C+33%2C+37%2C+1%29&themeTextSecondary=rgba%2832%2C+33%2C+37%2C+0.64%29&themeTextTertiary=rgba%2832%2C+33%2C+37%2C+0.40%29&themeSurfaceMain=rgba%28255%2C+255%2C+255%2C+1%29&themeBorderLight=rgba%2832%2C+33%2C+37%2C+0.12%29",
             page_type: 'product',
             fetch_type: 'standard',
             method: 'GET',
